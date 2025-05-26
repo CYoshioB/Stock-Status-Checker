@@ -16,7 +16,7 @@ url_list = [
     "https://newtype.us/p/U1QAHfKuXlryFcimMpSJ/h/rg-36-rx-93-hi-nu-gundam",                             #6
     "https://newtype.us/p/ORUrU23xYDLWOgNOm3R1/h/rg-37-god-gundam"                                      #7
 ]
-page_url = url_list[4]
+page_url = url_list[6]
 debug = False
 
 service = Service()
@@ -33,7 +33,6 @@ wait_time = 3
 try:
     driver.get(page_url)
 
-    storeName_elem = driver.find_element(By.XPATH, "//meta[@property='og:site_name']")
     productName_elem = driver.find_element(By.XPATH, "//meta[@property='og:title']")
     siteName_elem = driver.find_element(By.XPATH, "//meta[@property='og:url']")
 
@@ -41,11 +40,14 @@ except Exception as e:
     print("HTML element not found!")
 
 else:
-    storeName = storeName_elem.get_attribute("content")
     productName = productName_elem.get_attribute("content")
     siteName = siteName_elem.get_attribute("content")
+    if "newtype" in page_url:
+        storeName = "Newtype"
+    else:
+        storeName = driver.find_element(By.XPATH, "//meta[@property='og:site_name']").get_attribute("content")
 
-    print("Checking for stock at:")
+    print("Checking for stock of:")
     print(storeName)
     print(productName)
 
