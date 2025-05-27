@@ -16,8 +16,7 @@ url_list = [
     "https://newtype.us/p/U1QAHfKuXlryFcimMpSJ/h/rg-36-rx-93-hi-nu-gundam",                             #6
     "https://newtype.us/p/ORUrU23xYDLWOgNOm3R1/h/rg-37-god-gundam"                                      #7
 ]
-page_url = url_list[6]
-debug = False
+#page_url = url_list[6]
 
 service = Service()
 options = Options()
@@ -31,6 +30,7 @@ driver = webdriver.Firefox(service=service, options=options)
 wait_time = 3
 
 try:
+    page_url = input("Please provide a url to check: ")
     driver.get(page_url)
 
     productName_elem = driver.find_element(By.XPATH, "//meta[@property='og:title']")
